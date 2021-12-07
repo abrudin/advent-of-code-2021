@@ -58,5 +58,4 @@
                (* (reduce + (filter (partial not= -1) (get bingo-board :board))) (get bingo-board :number))))
    :second (let [input (parse-input (get-lines file))]
              (let [bingo-board (cross-until-one-left (get input :numbers) (get input :boards))]
-               (println bingo-board)
                (* (reduce + (filter (partial not= -1) (get bingo-board :board))) (get bingo-board :number))))})
