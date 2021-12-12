@@ -55,3 +55,9 @@
     (let [output (day9 "day9.txt")]
       (is (= 496 (get output :first)))
       (is (= 902880 (get output :second))))))
+
+(deftest day10-test
+  (testing
+    (let [output (day10 "day10.txt")]
+      (is (= 268845 (get output :first)))
+      (is (= 4038824534 (get output :second))))))
