@@ -68,6 +68,12 @@
       (is (= 1608 (get output :first)))
       (is (= 214 (get output :second))))))
 
+(deftest day12-test
+  (testing
+    (let [output (day12 "day12.txt")]
+      (is (= 4241 (get output :first)))
+      (is (= 122134 (get output :second))))))
+
 (def s
   "
 ##....##..########....####....######....########..##....##..######....######..
@@ -82,3 +88,9 @@
     (let [output (day13 "day13.txt")]
       (is (= 759 (get output :first)))
       (is (= s (get output :second))))))
+
+(deftest day14-test
+  (testing
+    (let [output (day14 "day14.txt")]
+      (is (= 3831 (get output :first)))
+      (is (= 5725739914282 (get output :second))))))

@@ -12,3 +12,5 @@
 (defn get-lines [file]
   (with-open [rdr (clojure.java.io/reader (.getFile (clojure.java.io/resource file)))]
     (doall (line-seq rdr))))
+
+(defn map-on-map [m, f] (reduce (fn [new, [k v]] (assoc new k (f v))) {} m))

@@ -4,16 +4,18 @@
 
 (defn- find-error [line]
   (reduce (fn [stack char]
-            (if (number? stack) stack (case char
-                                        \( (conj stack \()
-                                        \[ (conj stack \[)
-                                        \{ (conj stack \{)
-                                        \< (conj stack \<)
-                                        \) (if (= (first stack) \() (pop stack) 3)
-                                        \] (if (= (first stack) \[) (pop stack) 57)
-                                        \} (if (= (first stack) \{) (pop stack) 1197)
-                                        \> (if (= (first stack) \<) (pop stack) 25137)
-                                        )))
+            (if (number? stack)
+              stack
+              (case char
+                \( (conj stack \()
+                \[ (conj stack \[)
+                \{ (conj stack \{)
+                \< (conj stack \<)
+                \) (if (= (first stack) \() (pop stack) 3)
+                \] (if (= (first stack) \[) (pop stack) 57)
+                \} (if (= (first stack) \{) (pop stack) 1197)
+                \> (if (= (first stack) \<) (pop stack) 25137)
+                )))
           '()
           (seq line))
   )
