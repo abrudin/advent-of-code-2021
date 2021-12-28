@@ -16,28 +16,27 @@
     "end")
   )
 
-(defn max-one-of-each-small [arr]
-  (let [a (frequencies arr)]
-    (let [lower-keys (filter #(Character/isLowerCase ^char (first %)) (keys a))]
-      (every? #(<= (get a %) 1) lower-keys
-              ))))
+(defn max-one-of-each-small [freq, lower-keys]
+  (every? #(<= (get freq %) 1) lower-keys))
 
-(defn max-two-of-one-small-and-one-of-rest [arr]
-  (let [a (frequencies arr)]
-    (let [lower-keys (filter #(Character/isLowerCase ^char (first %)) (keys a))]
-      (and (<= (count (filter #(= 2 (get a %)) lower-keys)) 1)
-           (every? #(<= (get a %) 2) lower-keys
-                   )))))
+(defn max-two-of-one-small-and-one-of-rest [freq lower-keys]
+  (and
+    (<= (count (filter #(= 2 (get freq %)) lower-keys)) 1)
+    (every? #(<= (get freq %) 2) lower-keys)))
 
-(defn walk-caves [start-from, finished, cave-map, small-caves-fn]
+(defn cave-limiting-fn [arr, variant]
+  (let [freq (frequencies arr)]
+    (let [lower-keys (filter #(Character/isLowerCase ^char (first %)) (keys freq))]
+      (variant freq lower-keys)
+      )))
+
+(defn walk-caves [start-from, all-finished, cave-map, small-caves-fn]
   (if (empty? start-from)
-    finished
-    (let [nexts (mapcat (fn [row] (map (partial conj row) (get cave-map (last row)))) start-from)]
-      (let [finisheds (filter (comp (partial = "end") last) nexts)]
-        (let [remaining (filter #(and (small-caves-fn %) (not= "end" (last %))) nexts)]
-          (walk-caves remaining (concat finisheds finished) cave-map small-caves-fn)
-          ))))
-  )
+    all-finished
+    (let [next-cave (mapcat (fn [row] (map (partial conj row) (get cave-map (last row)))) start-from)]
+      (let [finished (filter (comp (partial = "end") last) next-cave)]
+        (let [remaining (filter #(and (cave-limiting-fn % small-caves-fn) (not= "end" (last %))) next-cave)]
+          (recur remaining (concat finished all-finished) cave-map small-caves-fn))))))
 
 (defn day12 [file]
   (let [coordinates (parse-day-12 file)]
