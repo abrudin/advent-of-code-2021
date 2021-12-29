@@ -94,3 +94,25 @@
     (let [output (day14 "day14.txt")]
       (is (= 3831 (get output :first)))
       (is (= 5725739914282 (get output :second))))))
+
+; Too inefficient - but eventually terminates
+;(deftest day15-test
+;  (testing
+;    (let [output (day15 "day15.txt")]
+;      (is (= 553 (get output :first)))
+;      (is (= 2858 (get output :second)))
+;      )))
+
+(deftest day16-test
+  (testing
+    (let [output (day16 "day16.txt")]
+      (is (= 843 (get output :first)))
+      (is (= 5390807940351 (get output :second)))
+      )))
+
+(deftest day17-test
+  (testing
+    (let [output (day17 "day17.txt")]
+      (is (= 9180 (get output :first)))
+      (is (= 3767 (get output :second)))
+      )))
