@@ -20,6 +20,7 @@
 (load "day15")
 (load "day16")
 (load "day17")
+(load "day18")
 
 (defn -main
   "Run advent-of-code 2021."
@@ -40,6 +41,7 @@
   ;(println (day14 "day14.txt"))
   ;(println (day15 "day15.txt"))
   ;(println (day16 "day16.txt"))
-  (println (day17 "day17.txt"))
+  ;(println (day17 "day17.txt"))
+  (println (day18 "day18.txt"))
   )
 
